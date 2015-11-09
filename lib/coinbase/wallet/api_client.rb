@@ -107,6 +107,15 @@ module Coinbase
         out
       end
 
+      def verifications(params = {})
+        out = nil
+        get("/v2/user/verifications", params) do |resp|
+          out = APIObject.new(self, resp.data)
+          yield(out, resp) if block_given?
+        end
+        out
+      end
+
       def update_current_user(params = {})
         out = nil
         put("/v2/user", params) do |resp|
