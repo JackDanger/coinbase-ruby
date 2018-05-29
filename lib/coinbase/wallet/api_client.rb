@@ -126,6 +126,18 @@ module Coinbase
       end
 
       #
+      # Hold-Balances
+      #
+      def hold_balances(params = {})
+        out = nil
+        get("/v2/hold-balances", params) do |resp|
+        out = APIObject.new(self, resp.data)
+          yield(out, resp) if block_given?
+        end
+        out
+      end
+
+      #
       # Accounts
       #
       def accounts(params = {})
