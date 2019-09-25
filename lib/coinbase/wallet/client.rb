@@ -1,7 +1,8 @@
 module Coinbase
   module Wallet
-    BASE_API_URL  = "https://api.coinbase.com"
-    API_VERSION   = '2015-06-16'
+    BASE_API_URL    = "https://api.coinbase.com"
+    API_VERSION     = '2015-06-16'
+    ACCEPT_LANGUAGE = 'en' 
 
     class Client < NetHTTPClient
       def initialize(options={})
@@ -22,7 +23,8 @@ module Coinbase
         { 'CB-ACCESS-KEY' => @api_key,
           'CB-ACCESS-SIGN' => signature,
           'CB-ACCESS-TIMESTAMP' => ts,
-          'CB-VERSION' => API_VERSION }
+          'CB-VERSION' => API_VERSION,
+          'Accept-Language' => ACCEPT_LANGUAGE }
       end
     end
 
@@ -39,7 +41,8 @@ module Coinbase
 
       def auth_headers(method, path, body)
         { 'Authorization' => "Bearer #{@access_token}",
-          'CB-VERSION' => API_VERSION }
+          'CB-VERSION' => API_VERSION,
+          'Accept-Language' => ACCEPT_LANGUAGE }
       end
 
       def authorize!(redirect_url, params = {})
@@ -94,7 +97,8 @@ module Coinbase
         { 'CB-ACCESS-KEY' => @api_key,
           'CB-ACCESS-SIGN' => signature,
           'CB-ACCESS-TIMESTAMP' => ts,
-          'CB-VERSION' => API_VERSION }
+          'CB-VERSION' => API_VERSION,
+          'Accept-Language' => ACCEPT_LANGUAGE }
       end
     end
   end
